@@ -1,216 +1,154 @@
-# 🍔 Group Ordering Feature Adoption Analysis
+# Group Ordering Feature Analytics
 
-A Product Analytics case study investigating the adoption, retention, and conversion performance of a newly launched Group Ordering feature in a food delivery application.
+## Overview
+Group Ordering is a collaborative ordering feature that allows multiple users to participate in a shared order.
+This project analyzes user behavior across the complete feature lifecycle, from initial discovery to final order completion. The objective is to understand feature adoption, identify conversion bottlenecks, evaluate user retention, and generate actionable product recommendations using SQL and Tableau.
 
-Dataset Size:
-- 100,000 Users
-- 3.3 Million Events
-- Multiple User Segments
-- Cross-Platform User Activity (iOS, Android, Web)
+**Tools:** SQL, PostgreSQL, Tableau
 
-Tools Used:
-- SQL
-- Snowflake
-- Tableau
-- Product Analytics Frameworks
+## Business Objectives
+* Measure overall feature adoption.
+* Track user progression across the ordering journey.
+* Identify stages with the highest user drop-off.
+* Compare adoption behavior across user segments.
+* Analyze platform-wise performance.
+* Evaluate retention trends through cohort analysis.
 
-## Business Problem
+## Dataset
+The dataset contains user interaction events generated throughout the Group Ordering experience.
 
-A food delivery company launched a Group Ordering feature that allows multiple users to place orders together.
+### Key Events
+* Restaurant View
+* Group Order Click
+* Invite Sent To Friend
+* Checkout
+* Order Complete
 
-While the feature appeared promising, the product team lacked visibility into:
+### Additional Attributes
+* User ID
+* Event Date
+* Platform
+* User Segment
+* Event Name
 
-- Feature adoption
-- User engagement
-- Funnel conversion
-- Retention impact
-- Key drop-off points
+---
 
-The goal of this analysis was to understand how users interact with the feature, identify adoption bottlenecks, and provide actionable product recommendations.
+## Overall Feature Adoption
+This analysis measures how many users adopted the Group Ordering feature compared to those who never interacted with it.
 
-## Project Objectives
+<img width="1335" height="675" alt="07_feature_impact (eliminated)" src="https://github.com/user-attachments/assets/c210cf0a-8927-4960-a2df-bc831c2445be" />
 
-- Measure feature adoption across the user base
-- Identify the largest conversion bottlenecks
-- Analyze adoption by user segment
-- Evaluate platform-level adoption patterns
-- Measure retention and engagement impact
-- Generate product recommendations based on behavioral data
 
-## Dataset Overview
+### Key Findings
+* Feature adoption reached 82.6%, indicating strong feature awareness and discovery.
+* Only 17.4% of users never interacted with the feature.
+* Adoption is already strong; improving conversion through later stages presents the biggest opportunity.
 
-### Users Table
+### Business Interpretation
+The feature successfully reaches a large portion of the user base. Rather than increasing awareness, future product efforts should focus on helping users progress further through the ordering journey.
 
-Contains user-level attributes:
-
-- User ID
-- Signup Date
-- Platform
-- City
-- User Segment
-
-### Events Table
-
-Contains event-level product telemetry:
-
-- User ID
-- Session ID
-- Event Timestamp
-- Event Name
-- Platform
-
-Key Events:
-
-- restaurant_view
-- group_order_click
-- invite_sent_to_friend
-- checkout
-- order_complete
-
-## Analysis Workflow
-
-1. Data Validation & Exploration
-2. Funnel Analysis
-3. Adoption Analysis
-4. Platform Analysis
-5. User Segment Analysis
-6. Retention Analysis
-7. Cohort Analysis
-8. Product Impact Analysis
-9. Product Recommendations
+---
 
 ## Feature Adoption Funnel
+To understand how users progress through the experience, a funnel was created covering every major stage of the ordering journey.
 
-<img width="2884" height="1440" alt="01_feature_adoption_funnel" src="https://github.com/user-attachments/assets/fe4011a7-b5d8-435f-b93a-d23fd78862ff" />
+<img width="2884" height="1440" alt="01_feature_adoption_funnel" src="https://github.com/user-attachments/assets/3846fa6c-37c9-42e0-a202-1da1bb6c5a34" />
 
-The majority of users successfully discovered the feature, but conversion dropped significantly in later stages of the journey.
+### Funnel Journey
+Restaurant View → Group Order Click → Invite Sent To Friend → Checkout → Order Complete
 
-The funnel analysis revealed that the largest user loss occurred after users interacted with the feature but before reaching checkout.
+### Key Findings
+* Strong adoption occurs immediately after restaurant discovery.
+* User participation remains stable through the invitation stage.
+* The largest reduction in user volume occurs before checkout.
+* Most users who reach checkout successfully complete their order.
 
-## Funnel Bottlenecks
+### Business Interpretation
+The funnel shows strong top-of-funnel engagement, with most users discovering and initiating group orders.
+A significant reduction occurs before checkout, suggesting friction during group coordination, decision-making, or purchase commitment.
+Users who successfully reach checkout demonstrate a very high completion rate, indicating that checkout itself is not the primary issue.
 
-<img width="1342" height="668" alt="02_Largest Funnel Drop-Offs" src="https://github.com/user-attachments/assets/2f5c8cb4-7afa-464d-9aaf-dd9fc158ef05" />
+---
 
-### Key Insight
+## Leakage Analysis
+Drop-off analysis highlights where users abandon the ordering journey.
 
-The largest conversion loss occurred between Group Order Click and Checkout, where 47.7% of users abandoned the journey.
+<img width="1342" height="668" alt="02_Largest Funnel Drop-Offs" src="https://github.com/user-attachments/assets/1463d531-5ccb-40b8-a78f-e186ea6c60cc" />
 
-### Key Finding
+### Key Findings
+* The largest leakage occurs between Group Order Click and Checkout.
+* Nearly half of users fail to progress to checkout after initiating a group order.
+* Checkout to Order Completion shows relatively low abandonment.
 
-The largest conversion loss occurred between:
+### Product Opportunity
+* The largest growth opportunity exists between Group Order Click and Checkout.
+* Reducing friction at this stage could significantly increase completed orders without requiring additional user acquisition.
 
-Group Order Click → Checkout
+---
 
-This stage experienced a 47.7% user drop-off rate, making it the primary bottleneck in the feature adoption journey.
+## User Segment Analysis
+Users were segmented based on engagement levels to understand which groups adopt the feature most frequently.
 
-Potential causes:
+<img width="1344" height="685" alt="04_Feature Adoption Penetration Rate by User Segment" src="https://github.com/user-attachments/assets/9594b58f-0ae3-453b-be22-1ed13203c582" />
 
-- Invitation friction
-- Group coordination challenges
-- Checkout complexity
+### Key Findings
+* Power users exhibit the highest adoption rate.
+* Regular users also demonstrate strong engagement.
+* Casual users lag behind both groups.
+* Casual users represent the largest opportunity for future growth.
 
-## Adoption by User Segment
+### Business Interpretation
+Power and Regular users have already integrated the feature into their ordering behavior.
+Increasing feature visibility and encouraging first-time usage among Casual users is likely to generate the highest improvement in adoption.
 
-<img width="1344" height="685" alt="04_Feature Adoption Penetration Rate by User Segment" src="https://github.com/user-attachments/assets/70630e01-4dca-4ae8-a502-19bd00afc247" />
-
-### Key Insight
-
-Power Users demonstrated near-universal adoption while Casual Users adopted the feature at significantly lower rates.
-
-Feature adoption varied significantly across user segments.
-
-### Findings
-
-- Power Users showed near-universal adoption.
-- Regular Users also demonstrated strong engagement.
-- Casual Users adopted the feature at substantially lower rates.
-
-This suggests the feature naturally appeals to highly engaged users while creating less perceived value for infrequent users.
-
-## Cohort Retention Analysis
-
-Retention patterns remained relatively stable across cohorts.
-
-Users who interacted with the Group Ordering feature demonstrated stronger long-term engagement compared to the overall user population.
-
-This suggests the feature may contribute positively to user stickiness and repeat engagement.
+---
 
 ## Platform Analysis
+Feature adoption was compared across platforms to determine whether device experience impacts engagement.
 
-Feature adoption remained consistent across Android, iOS, and Web platforms.
+<img width="1107" height="661" alt="05_Feature Adoption Penetration Rate by Platform" src="https://github.com/user-attachments/assets/c675232f-9ec0-47e8-8041-da312057401e" />
 
-No meaningful platform-specific adoption gaps were observed.
+### Key Findings
+* Adoption rates remain highly consistent across Android, iOS, and Web.
+* No platform demonstrates a significant advantage or disadvantage.
+* User behavior appears driven more by product experience than platform differences.
 
-This indicates that platform type was not a major driver of feature usage behavior.
+### Business Interpretation
+Since adoption remains consistent across all platforms, platform-specific issues appear minimal.
+Future optimization efforts should focus on improving the product experience rather than implementing platform-specific changes.
 
-## Key Findings
+---
 
-- 82.6% of users adopted the Group Ordering feature.
-- Power Users recorded the highest adoption rates.
-- Casual Users were significantly less likely to adopt.
-- The largest drop-off occurred between Group Order Click and Checkout.
-- Platform had minimal impact on adoption behavior.
-- Feature adopters demonstrated stronger engagement patterns than non-adopters.
+## Cohort Retention Analysis
+A cohort retention analysis was performed to evaluate how user engagement changes over time after adoption.
 
-## Product Recommendations
+<img width="1387" height="667" alt="03_cohort_retention_heatmap" src="https://github.com/user-attachments/assets/d5fd3dfc-11c0-4b56-b7bb-80a775cf7359" />
 
-### 1. Reduce Checkout Friction
+### Key Findings
+* Retention patterns remain relatively stable across cohorts.
+* No major cohort shows unusual churn behavior.
+* User engagement gradually declines over time, following a typical retention pattern.
+* Retention consistency suggests the feature continues to provide value after initial adoption.
 
-The largest drop-off occurred before checkout.
+### Business Interpretation
+Retention remains relatively stable over time, suggesting that users continue finding value after adopting the feature.
+The absence of major retention spikes or sudden declines indicates consistent long-term engagement across user cohorts.
 
-Potential improvements:
+---
 
-- Simplify group checkout flows
-- Reduce required user actions
-- Improve checkout visibility
+## Executive Summary
+* Overall feature adoption reached 82.6%, indicating strong user awareness and successful feature discovery.
+* The primary conversion bottleneck occurs between Group Order Click and Checkout, where nearly half of users abandon the journey.
+* Power users demonstrate the highest adoption rates, while Casual users represent the largest opportunity for future growth.
+* Adoption remains highly consistent across Android, iOS, and Web, suggesting minimal platform-specific differences.
+* Cohort retention remains stable, indicating sustained engagement after feature adoption.
+* Improving progression from group order creation to checkout offers the highest potential impact on increasing completed orders.
 
-### 2. Increase Casual User Adoption
+---
 
-Introduce:
-
-- Feature onboarding
-- Contextual prompts
-- First-time incentives
-
-### 3. Improve Group Coordination
-
-Reduce invitation friction through:
-
-- Shareable links
-- Faster invite acceptance
-- Improved group visibility
-
-### 4. Track Feature Success
-
-Monitor:
-
-- Adoption Rate
-- Checkout Conversion
-- Retention
-- Repeat Group Orders
-
-## SQL Analysis Files
-
-- 01_data_validation.sql
-- 02_exploratory_analysis.sql
-- 03_feature_adoption.sql
-- 04_funnel_analysis.sql
-- 05_segment_analysis.sql
-- 06_platform_analysis.sql
-- 07_session_analysis.sql
-- 08_abandonment_analysis.sql
-- 09_user_journey_analysis.sql
-- 10_retention_analysis.sql
-- 11_cohort_analysis.sql
-- 12_feature_impact_analysis.sql
-- 13_product_health_scoring.sql
-
-## Conclusion
-
-This project analyzed over 3.3 million product events to evaluate the performance of a newly launched Group Ordering feature.
-
-The analysis identified a major conversion bottleneck between feature engagement and checkout, highlighted significant adoption differences across user segments, and provided data-driven recommendations to improve feature performance.
-
-The project demonstrates the application of Product Analytics principles, SQL-based behavioral analysis, funnel optimization, retention analysis, and product decision-making.
-
-
+## Recommendations
+* Simplify the checkout experience to reduce funnel leakage.
+* Re-engage users who initiate but do not complete group orders.
+* Increase feature visibility among Casual users through targeted onboarding and in-app prompts.
+* Experiment with incentives that encourage users to complete the checkout process.
+* Continue monitoring cohort retention to measure the long-term impact of future product improvements.
