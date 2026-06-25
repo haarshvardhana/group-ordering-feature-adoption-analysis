@@ -152,3 +152,14 @@ Bridge the $31.74\%$ usage gap among Casual users by building automated, conditi
 
 ### 4. Create Collaborative Gamification and Shared Checkout Discounts
 Design structural financial benefits that naturally reward group order completion over individual ordering methods. Experiment with group-scale milestones, such as unlocking tiered restaurant discounts as more distinct participants join the checkout cart.
+
+## Final Note
+
+The complete event dataset contains approximately **3.3 million event records**, which exceeds GitHub's recommended file size for standard repositories.
+
+To keep this repository lightweight, the following files are included:
+
+- `users.csv` – User-level dataset used throughout the analysis.
+- `generate_dataset.py` – Python script used to generate the complete synthetic event dataset.
+
+The full `events.csv` file is intentionally excluded due to its size. Running `generate_dataset.py` will recreate the dataset used for this analysis.
